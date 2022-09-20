@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{ profile.user }}{% endblock title %}
+{% block content %}
+    <h1>Profile detail </h1>
+    <p><b>Username:</b> {{ detail.user }}</p>
+    <p><b>Shelter:</b> {{ detail.shelter }}</p>
+    {% if is_owner %}
+        <a href={% url 'profile_update' detail.pk %}>Update</a>
+    {% endif %}
+{% endblock content %}

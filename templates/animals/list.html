@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    All animals
+{% endblock title %}
+{% block content %}
+    <h1 class="text-center">Animal list</h1>
+    <div class="">
+        <table class="table table-borderless table-hover text-center">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nickname</th>
+                <th scope="col">Age</th>
+                <th scope="col">Identifying mark</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for animal in animal_list %}
+                <tr>
+                    <th scope="row">{{ animal.pk }}</th>
+                    <td>{{ animal.nickname }}</td>
+                    <td>{{ animal.age }}</td>
+                    <td>{{ animal.identifying_mark }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
