@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+    All animals
+{% endblock title %}
+{% block content %}
+    <h1 class="text-center">Animal list</h1>
+    <div class="">
+        <a href="{% url 'animal_create' %}">Add animal</a>
+        {% if animal_list %}
+            <table class="table table-borderless table-hover text-center">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Identifying mark</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for animal in animal_list %}
+                    <tr>
+                        <th scope="row">{{ animal.pk }}</th>
+                        <td><a href="{% url 'animal_detail' animal.id %}"> {{ animal.nickname }}</a></td>
+                        <td>{{ animal.age }}</td>
+                        <td>{{ animal.identifying_mark }}</td>
+                        <td><a href="{% url 'animal_update' animal.id %}">Update</a> / <a
+                                href="{% url 'animal_delete' animal.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3>Animals not found</h3>
+        {% endif %}
+    </div>
+
+{% endblock %}

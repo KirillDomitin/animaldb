@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1>Deleting {{ animal_delete }}</h1>
+        <p>Are you sure?</p>
+        <button type="submit">Delete</button>
+
+        {#    <button type="reset">Cancel</button>#}
+    </form>
+    <form method="get" action="{% url 'animal_list' %}">
+            <button type="submit">Cancel</button>
+        </form>
+{% endblock content %}
