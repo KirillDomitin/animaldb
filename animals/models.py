@@ -30,8 +30,9 @@ class AnimalModel(models.Model):
     arrived_at = models.DateTimeField(auto_now_add=True, verbose_name=_('arrived at'))
     weight = models.DecimalField(max_digits=4, decimal_places=1, verbose_name=_('weight'))
     height = models.PositiveSmallIntegerField(verbose_name=_('height'))
-    identifying_mark = models.CharField(max_length=250, blank=True, verbose_name=_('identifying_mark'))
+    identifying_mark = models.TextField(max_length=500, blank=True, verbose_name=_('identifying_mark'))
     shelter = models.ForeignKey(ShelterModel, on_delete=models.CASCADE, default=None)
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'animal'
@@ -42,3 +43,11 @@ class AnimalModel(models.Model):
 
     def get_absolute_url(self):
         return reverse('animals', kwargs={'id': self.pk})
+
+    def save_delete(self):
+        self.is_deleted = True
+        self.save()
+
+    def restore(self):
+        self.is_deleted = False
+        self.save()

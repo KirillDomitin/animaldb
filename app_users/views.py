@@ -29,7 +29,7 @@ def login_view(request):
             user = authenticate(username=form.cleaned_data.get('username'), password=form.cleaned_data.get('password'))
             if user:
                 login(request, user)
-                return redirect('/')
+                return redirect('animal_list')
             form.add_error('__all__', 'Проверьте правильность написания логина и пароля!')
     else:
         form = AuthForm()
@@ -38,7 +38,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('animal_list')
 
 
 class ProfileDetailView(DetailView):

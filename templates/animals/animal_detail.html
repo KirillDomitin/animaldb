@@ -2,11 +2,15 @@
 {% block title %}{{ animal_detail }}{% endblock title %}
 {% block content %}
     <h1>{{ animal_detail }}</h1>
-    <p><b>Nickname:  </b>{{ animal_detail.nickname }}</p>
-    <p><b>Age: </b>{{ animal_detail.age }}</p>
-    <p><b>Arrived at: </b>{{ animal_detail.arrived_at }}</p>
-    <p><b>Weight: </b>{{ animal_detail.weight }}</p>
-    <p><b>Height: </b>{{ animal_detail.height }}</p>
-    <p><b>Identifying mark: </b>{{ animal_detail.identifying_mark }}</p>
-    <p><b>Shelter: </b>{{ animal_detail.shelter }}</p>
+    {% if animal_detail.is_deleted %}
+        <h2>DELETED</h2>
+    {% else %}
+        <p><b>Nickname: </b>{{ animal_detail.nickname }}</p>
+        <p><b>Age: </b>{{ animal_detail.age }}</p>
+        <p><b>Arrived at: </b>{{ animal_detail.arrived_at }}</p>
+        <p><b>Weight: </b>{{ animal_detail.weight }}</p>
+        <p><b>Height: </b>{{ animal_detail.height }}</p>
+        <p><b>Identifying mark: </b>{{ animal_detail.identifying_mark }}</p>
+        <p><b>Shelter: </b>{{ animal_detail.shelter }}</p>
+    {% endif %}
 {% endblock content %}

@@ -5,4 +5,4 @@ from .models import AnimalModel
 class AnimalCreateForm(ModelForm):
     class Meta:
         model = AnimalModel
-        fields = '__all__'
+        fields = ('nickname', 'age', 'weight', 'height', 'identifying_mark', 'shelter')
