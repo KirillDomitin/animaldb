@@ -15,7 +15,7 @@ def registration_view(request):
                                             password=form.cleaned_data.get('password1'))
             Profile.objects.create(user=user, shelter=form.cleaned_data.get('shelter'))
             login(request, user)
-            return redirect('/')
+            return redirect('animal_list')
         print(form.errors)
     else:
         form = UserRegistrationForm()

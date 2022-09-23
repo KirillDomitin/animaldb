@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'animaldb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'animal_db',
-        'USER': 'animal_db',
+        'NAME': 'animaldb',
+        'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432'
