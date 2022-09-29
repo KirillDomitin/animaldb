@@ -6,3 +6,4 @@ class AnimalCreateForm(ModelForm):
     class Meta:
         model = AnimalModel
         fields = ('nickname', 'age', 'weight', 'height', 'identifying_mark', 'shelter')
+        # fields = ('nickname', 'age', 'weight', 'height', 'identifying_mark', 'shelter')

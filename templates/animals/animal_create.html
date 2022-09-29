@@ -1,8 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create</button>
-</form>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="id_nickname" class="form-label">Nickname</label>
+            <input type="text" name="nickname" class="form-control" required id="id_nickname" placeholder="Nickname">
+        </div>
+        <div class="mb-3">
+            <label for="id_age" class="form-label">Age</label>
+            <input type="number" name="age" step="1" required id="id_age" class="form-control" placeholder="Age">
+        </div>
+        <div class="mb-3">
+            <label for="id_weight" class="form-label">Weight</label>
+            <input type="number" name="weight" step="1" required id="id_weight" class="form-control"
+                   placeholder="Weight">
+        </div>
+        <div class="mb-3">
+            <label for="id_height" class="form-label">Height</label>
+            <input type="number" name="height" step="1" required id="id_height" class="form-control"
+                   placeholder="Height">
+        </div>
+        <div class="mb-3">
+            <label for="id_identifying_mark" class="form-label">Identifying mark</label>
+            <textarea name="identifying_mark" cols="40" rows="10" maxlength="500" id="id_identifying_mark"
+                      class="form-control"></textarea>
+        </div>
+{#        <div class="mb-3">#}
+{#            <label for="id_shelter" class="form-label">Shelter:</label>#}
+{#            <select class="form-select" name="shelter" required id="id_shelter" aria-label="Default select example">#}
+{#                {% for x, y in  form.shelter.field.choices %}#}
+{#                    <option value="{{ x }}">{{ y }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </form>
+
 {% endblock content %}

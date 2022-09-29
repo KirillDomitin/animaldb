@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, UpdateView
 
+import animals
 from .forms import UserRegistrationForm, AuthForm, ProfileUpdateForm
 from .models import Profile
 
@@ -14,6 +15,22 @@ def registration_view(request):
             user = User.objects.create_user(username=form.cleaned_data.get('username'),
                                             password=form.cleaned_data.get('password1'))
             Profile.objects.create(user=user, shelter=form.cleaned_data.get('shelter'))
+            group = Group.objects.filter(name='ShelterGroup').first()
+            if group:
+                group.user_set.add(user)
+                group.save()
+            else:
+                group = Group.objects.create(name='ShelterGroup')
+                group.user_set.add(user)
+                group.save()
+            perm = Permission.objects.filter(content_type__model='animalmodel').all()
+            print(perm)
+            # perm_list = ['animals.add_animalmodel',
+            #              'animals.change_animalmodel',
+            #              'animals.view_animalmodel',
+            #              'animals.delete_animalmodel']
+            group.permissions.set(perm)
+            group.save()
             login(request, user)
             return redirect('animal_list')
         print(form.errors)

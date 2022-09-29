@@ -5,7 +5,11 @@
 {% block content %}
     <h1 class="text-center">Animal list</h1>
     <div class="">
-        <a href="{% url 'animal_create' %}">Add animal</a>
+        {% for group in request.user.groups.all %}
+            {% if group.name == 'ShelterGroup' %}
+                <a href="{% url 'animal_create' %}">Add animal</a>
+            {% endif %}
+        {% endfor %}
         {% if animal_list %}
             <table class="table table-borderless table-hover text-center">
                 <thead>
@@ -14,9 +18,11 @@
                     <th scope="col">Nickname</th>
                     <th scope="col">Age</th>
                     <th scope="col">Identifying mark</th>
-                    {% if not request.user.is_anonymous %}
-                        <th scope="col">Action</th>
-                    {% endif %}
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'ShelterGroup' %}
+                            <th scope="col">Action</th>
+                        {% endif %}
+                    {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
@@ -25,11 +31,13 @@
                         <th scope="row">{{ animal.pk }}</th>
                         <td><a href="{% url 'animal_detail' animal.id %}"> {{ animal.nickname }}</a></td>
                         <td>{{ animal.age }}</td>
-                        <td>{{ animal.identifying_mark }}</td>
-                        {% if not request.user.is_anonymous %}
-                            <td><a href="{% url 'animal_update' animal.id %}">Update</a> / <a
-                                    href="{% url 'animal_delete' animal.id %}">Delete</a></td>
-                        {% endif %}
+                        <td>{{ animal.identifying_mark|truncatechars:20 }}</td>
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'ShelterGroup' %}
+                                <td><a href="{% url 'animal_update' animal.id %}">Update</a> / <a
+                                        href="{% url 'animal_delete' animal.id %}">Delete</a></td>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                 {% endfor %}
                 </tbody>
