@@ -6,11 +6,13 @@ from .serializers import AnimalSerializer
 
 
 class AnimalAPIList(generics.ListCreateAPIView):
+    """Получение списка всех животных"""
     queryset = AnimalModel.objects.all()
     serializer_class = AnimalSerializer
 
 
 class AnimalRetriveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """Чтение, Редактирование и Удаление конкретного животного"""
     queryset = AnimalModel.objects.filter(is_deleted=False).all()
     serializer_class = AnimalSerializer
 

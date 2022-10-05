@@ -1,20 +1,22 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group, Permission
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView, UpdateView
 
-import animals
 from .forms import UserRegistrationForm, AuthForm, ProfileUpdateForm
 from .models import Profile
 
 
 def registration_view(request):
+    """Функция регистрации пользователя"""
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data.get('username'),
                                             password=form.cleaned_data.get('password1'))
             Profile.objects.create(user=user, shelter=form.cleaned_data.get('shelter'))
+
+            # Все пользователи добавляются в группу 'ShelterGroup'
             group = Group.objects.filter(name='ShelterGroup').first()
             if group:
                 group.user_set.add(user)
@@ -24,11 +26,6 @@ def registration_view(request):
                 group.user_set.add(user)
                 group.save()
             perm = Permission.objects.filter(content_type__model='animalmodel').all()
-            print(perm)
-            # perm_list = ['animals.add_animalmodel',
-            #              'animals.change_animalmodel',
-            #              'animals.view_animalmodel',
-            #              'animals.delete_animalmodel']
             group.permissions.set(perm)
             group.save()
             login(request, user)
@@ -40,6 +37,7 @@ def registration_view(request):
 
 
 def login_view(request):
+    """Логин"""
     if request.method == 'POST':
         form = AuthForm(request.POST)
         if form.is_valid():
@@ -54,11 +52,13 @@ def login_view(request):
 
 
 def logout_view(request):
+    """Логаут"""
     logout(request)
     return redirect('animal_list')
 
 
 class ProfileDetailView(DetailView):
+    """Детальная информация пользователя"""
     model = Profile
     template_name = 'app_users/profile_detail.html'
     context_object_name = 'detail'
@@ -77,6 +77,7 @@ class ProfileDetailView(DetailView):
 
 
 class ProfileUpdateView(UpdateView):
+    """Редактирование данных пользователя"""
     model = Profile
     form_class = ProfileUpdateForm
     template_name = 'app_users/profile_update.html'

@@ -3,8 +3,9 @@ from .models import AnimalModel, ShelterModel
 
 
 class AnimalAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nickname', 'arrived_at', 'shelter')
-    ordering = ('id', 'nickname', 'arrived_at', 'shelter')
+    list_display = ('id', 'nickname', 'arrived_at', 'shelter', 'arrived_at', 'is_deleted')
+    ordering = ('id', 'nickname', 'arrived_at', 'shelter', 'arrived_at', 'is_deleted')
+    list_editable = ('is_deleted', 'shelter')
 
 class ShelterAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
@@ -12,5 +13,3 @@ class ShelterAdmin(admin.ModelAdmin):
 
 admin.site.register(AnimalModel, AnimalAdmin)
 admin.site.register(ShelterModel, ShelterAdmin)
-
-
