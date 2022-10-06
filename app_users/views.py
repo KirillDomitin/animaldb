@@ -38,12 +38,15 @@ def registration_view(request):
 
 def login_view(request):
     """Логин"""
+    next_page = request.GET.get('next', None)
     if request.method == 'POST':
         form = AuthForm(request.POST)
         if form.is_valid():
             user = authenticate(username=form.cleaned_data.get('username'), password=form.cleaned_data.get('password'))
             if user:
                 login(request, user)
+                if next_page:
+                    return redirect(next_page)
                 return redirect('animal_list')
             form.add_error('__all__', 'Проверьте правильность написания логина и пароля!')
     else:
@@ -53,7 +56,10 @@ def login_view(request):
 
 def logout_view(request):
     """Логаут"""
+    next_page = request.GET.get('next', None)
     logout(request)
+    if next_page:
+        return redirect(next_page)
     return redirect('animal_list')
 
 

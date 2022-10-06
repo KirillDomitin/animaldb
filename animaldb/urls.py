@@ -15,17 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
 
 from animals.api import AnimalAPIList, AnimalRetriveUpdateDestroyAPIView
 from animals.views import redirect_main
+
+schema_view = get_swagger_view(title='AnimalDb API')
+
 
 urlpatterns = [
     path('', redirect_main),
     path('admin/', admin.site.urls),
     path('animals/', include('animals.urls')),
     path('users/', include('app_users.urls')),
+    path('api/v1/', schema_view),
     path('api/v1/animallist/', AnimalAPIList.as_view()),
-    path('api/v1/animallist', AnimalAPIList.as_view()),
     path('api/v1/animallist/<int:pk>/', AnimalRetriveUpdateDestroyAPIView.as_view()),
-    path('api/v1/animallist/<int:pk>', AnimalRetriveUpdateDestroyAPIView.as_view()),
 ]
+
+
+
+

@@ -26,16 +26,14 @@ ___
     ```
 
     * активируй виртуальное окружение
-    *
         * Linux
-   ```
-   source myenv/bin/activate
-   ```
-    *
+         ```
+          source myenv/bin/activate
+         ```
         * Windows
-   ```
-   myenv\Scripts\activate
-   ```
+         ```
+          myenv\Scripts\activate
+         ```
 2. Клонируем репозиторий
     ```
    https://github.com/KirillDomitin/animaldb.git
@@ -49,19 +47,27 @@ ___
     ```
     python3 manage.py makemigrations
     ```
-    
+
     ```
     python3 manage.py migrate
     ```
 
-5. Запускаем локальный сервер 
+5. Запускаем локальный сервер
     ```
     python3 manage.py runserver
     ``` 
+
 ## Настройка
-Все основные настройки файле `animaldb/settings.py` 
+
+Все основные настройки файле `animaldb/settings.py`
+Первым делом следует создать суперпользователя командой
+
+ ```
+ python3 manage.py createsuperuser
+ ```
 
 По умочанию подключена PostgreSQL изменить можно тут:
+
 ```python 
 ### animaldb/settings.py
 # Database
@@ -78,7 +84,9 @@ DATABASES = {
     }
 }
 ```
+
 Так же при разворачивании проекта на сервере рекомендуется удалить строку:
+
 ```python
 ### animaldb/settings.py
 REST_FRAMEWORK = {
@@ -91,3 +99,6 @@ REST_FRAMEWORK = {
     ]
 }
 ```
+ 
+# API
+<http://localhost:8000/api/v1/>
