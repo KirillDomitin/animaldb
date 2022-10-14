@@ -101,4 +101,103 @@ REST_FRAMEWORK = {
 ```
  
 # API
+___
+## Получение списка всех животных из всех приютов
+
+**GET метод**
+```
+/api/v1/animallist/  
+```
+
+Пример:
+
+```
+http://localhost:8000/api/v1/animallist/
+```
+
+___
+## Получение информации по конкретному животному
+
+**GET метод**
+```
+/api/v1/animallist/{id}/
+```
+Параметры:
+
+**{id}** - уникаляный идентификатор животного
+
+Пример:
+```
+http://localhost:8000/api/v1/animallist/3
+```
+
+___
+
+## Добавление животного в базу
+
+**POST метод**
+
+```
+/api/v1/animallist/
+```
+Параметры:
+
+**data (body)** - {
+  "nickname": "string",
+  "age": 0,
+  "weight": 0,
+  "height": 0,
+  "identifying_mark": "string",
+  "shelter": 0
+}
+
+Пример:
+
+```json
+{
+  "nickname": "Tom",
+  "age": 2,
+  "weight": 3.0,
+  "height": 36,
+  "identifying_mark": "Особые приметы ",
+  "shelter": 1
+}
+```
+
+___
+
+## Удаление животно
+
+метод **DELETE**
+
+```djangourlpath
+/api/v1/animallist/{id}/
+```
+Параметры:
+
+**{id}** - уникаляный идентификатор животного
+
+Пример:
+```
+http://localhost:8000/api/v1/animallist/3
+```
+___
+## Внесение изменений в детальную информацию о животном
+
+метод **PUT** / **PATCH**
+
+```djangourlpath
+/api/v1/animallist/{id}/
+```
+Параметры:
+
+**{id}** - уникаляный идентификатор животного
+
+Пример:
+```
+http://localhost:8000/api/v1/animallist/3
+```
+
+___
+Все api сетоды так же доступны в swagger документаии по адресу:
 <http://localhost:8000/api/v1/>
