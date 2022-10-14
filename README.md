@@ -193,9 +193,25 @@ ___
 
 **{id}** - уникаляный идентификатор животного
 
+**data (body)** - {
+  "nickname": "string",
+  "age": 0,
+  "weight": 0,
+  "height": 0,
+  "identifying_mark": "string",
+  "shelter": 0
+}
+
 Пример:
-```
-http://localhost:8000/api/v1/animallist/3
+```json
+{
+  "nickname": "Tom the cat",
+  "age": 3,
+  "weight": 3.0,
+  "height": 35,
+  "identifying_mark": "",
+  "shelter": 1
+}
 ```
 
 ___
