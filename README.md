@@ -130,7 +130,14 @@ ___
 ```
 http://localhost:8000/api/v1/animallist/3
 ```
+Поля ответа:
 
+* nickname(str) - кличка,
+* age(SmallInteger) - возраст,
+* weight(Decimal) - вес,
+* height(PositiveSmallInteger) - рост,
+* identifying_mark(Text) - особые приметы
+* shelter(int) - идентификатор приюта
 ___
 
 ## Добавление животного в базу
@@ -163,10 +170,19 @@ ___
   "shelter": 1
 }
 ```
+Поля ответа:
 
+* nickname(str) - кличка,
+* age(SmallInteger) - возраст,
+* weight(Decimal) - вес,
+* height(PositiveSmallInteger) - рост,
+* identifying_mark(Text) - особые приметы
+* shelter(int) - идентификатор приюта
 ___
 
-## Удаление животно
+## Удаление животного
+Метод DELETE не удаляет животного из базы данных, а только помечает его и не отображает в веб интерфейсе
+
 
 метод **DELETE**
 
@@ -175,12 +191,24 @@ ___
 ```
 Параметры:
 
-**{id}** - уникаляный идентификатор животного
+**{id}** - уникальный идентификатор животного
 
-Пример:
+Пример заприоса:
 ```
 http://localhost:8000/api/v1/animallist/3
 ```
+Пример ответа:
+```json
+{
+  "nickname": "Tom the cat",
+  "age": 3,
+  "weight": 3.0,
+  "height": 35,
+  "identifying_mark": "",
+  "shelter": 1
+}
+```
+
 ___
 ## Внесение изменений в детальную информацию о животном
 
@@ -191,13 +219,29 @@ ___
 ```
 Параметры:
 
-**{id}** - уникаляный идентификатор животного
+**{id}** - уникальный идентификатор животного
 
-Пример:
-```
-http://localhost:8000/api/v1/animallist/3
+**data (body)** - {
+  "nickname": "string",
+  "age": 0,
+  "weight": 0,
+  "height": 0,
+  "identifying_mark": "string",
+  "shelter": 0
+}
+
+Пример body:
+```json
+{
+  "nickname": "Tom the cat",
+  "age": 3,
+  "weight": 3.0,
+  "height": 35,
+  "identifying_mark": "",
+  "shelter": 1
+}
 ```
 
 ___
-Все api сетоды так же доступны в swagger документаии по адресу:
+Все api методы так же доступны в 'swagger' документации по адресу:
 <http://localhost:8000/api/v1/>
